@@ -1,0 +1,64 @@
+<launch>
+  <arg name="namespace" default=""/>
+  <arg name="robot_type" default="mobile_robot"/>
+  <arg name="model_name" default="simple"/>
+  <arg name="file_type" default="sdf"/>
+  <arg name="with_arm" default="false"/>
+  <arg name="use_camera" default="false"/>
+  <arg name="model_file" default="$(find multi_robot)/models/$(arg robot_type)/$(arg model_name)/model.$(arg file_type)"/>
+  <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+  <arg name="use_ekf" default="false"/>
+
+  <group ns="$(arg namespace)">
+    <param name="tf_prefix" value="$(arg namespace)"/>
+    <node name="gazebo_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
+      args="-file $(arg model_file) -$(arg file_type) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw) -model $(arg namespace) -robot_namespace $(arg namespace)">
+      <remap if="$(arg use_ekf)" from="odom" to="raw_odom"/>
+    </node>
+    <include file="$(find multi_robot)/launch/one_robot/robot_state_publisher.launch">
+     <arg name="model_name" value="$(arg model_name)"/>
+     <arg name="prefix" value="$(arg namespace)"/>
+    <arg name="robot_type" value="$(arg robot_type)"/>
+    </include>
+    
+    <node if="$(arg use_ekf)" name="ekf" pkg="robot_localization" type="ekf_localization_node" output="screen">
+      <rosparam command="load" file="$(find neuronbot2_gazebo)/params/ekf_params.yaml"/>
+      <param if="$(eval namespace != '/')" name="map_frame" value="$(arg namespace)/map"/>
+      <param if="$(eval namespace != '/')" name="odom_frame" value="$(arg namespace)/odom"/>
+      <param if="$(eval namespace != '/')" name="base_link_frame" value="$(arg namespace)/base_footprint"/>
+      <param if="$(eval namespace != '/')" name="world_frame" value="$(arg namespace)/odom"/>
+      <param name="odom0" value="raw_odom"/>
+      <param name="imu0" value="imu/data"/>
+      <remap from="odometry/filtered" to="odom"/>
+    </node>
+    
+    <group if="$(eval robot_type == 'manipulator')">
+     <rosparam command="load" file="$(find multi_robot)/config/control/mobile_robot/arm_control.yaml" />
+ 	 <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+     <node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="robot_base_joint_publisher 	 robot_base_velocity_controller"/>
+ 	 <rosparam command="load" file="$(find multi_robot)/config/control/mobile_robot/joint_state_controller.yaml" />
+  	 <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/>
+	 <rosparam command="load" file="$(find multi_robot)/config/control/mobile_robot/control.yaml" />
+    </group>
+    
+    <group if="$(eval model_name == 'four_wheels')">
+     <node name="base_controller_spawner" pkg="controller_manager" type="spawner" args="robot_base_joint_publisher 	 robot_base_velocity_controller"/>
+ 	 <rosparam command="load" file="$(find multi_robot)/config/control/mobile_robot/joint_state_controller.yaml" />
+  	 <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn joint_state_controller" respawn="false" output="screen"/>
+	 <rosparam command="load" file="$(find multi_robot)/config/control/mobile_robot/control.yaml" />
+    </group>
+ 	
+ 	  <group if="$(eval robot_type == 'drone')">
+ 	  <rosparam file="$(find multi_robot)/config/control/drone/controller.yaml" />
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+    controller/twist
+     --shutdown-timeout 3"/>
+       <rosparam command="load" file="$(find multi_robot)/config/control/drone/quadrotor_aerodynamics.yaml" />
+  <rosparam command="load" file="$(find multi_robot)/config/control/drone/robbe_2827-34_epp1045.yaml" />
+ 	</group>
+ 	
+  </group>
+</launch>

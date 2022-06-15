@@ -1,0 +1,634 @@
+<sdf version='1.7'>
+  <model name='mobile_manipulator'>
+    <link name='base_link'>
+      <inertial>
+        <pose>0.003095 0 0.053305 0 -0 0</pose>
+        <mass>47.873</mass>
+        <inertia>
+          <ixx>0.774277</ixx>
+          <ixy>-1.03782e-10</ixy>
+          <ixz>0.00763014</ixz>
+          <iyy>1.64933</iyy>
+          <iyz>1.09578e-12</iyz>
+          <izz>2.12393</izz>
+        </inertia>
+      </inertial>
+      <collision name='base_link_collision'>
+        <pose>0 0 0 1.5708 -0 3.14</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/robot_base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='base_link_visual'>
+        <pose>0 0 0 1.5708 -0 3.14</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model:////multi_robot/models/manipulator/four_wheels_with_arm/meshes/robot_base.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='arm_base_joint' type='revolute'>
+      <pose relative_to='base_link'>0.2 0 0.145 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>arm_base</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='arm_base'>
+      <pose relative_to='arm_base_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 -0.063005 -0 0 -0 0</pose>
+        <mass>1.6004</mass>
+        <inertia>
+          <ixx>0.00552197</ixx>
+          <ixy>7.95506e-10</ixy>
+          <ixz>-1.34378e-09</ixz>
+          <iyy>0.00352397</iyy>
+          <iyz>-1.10072e-08</iyz>
+          <izz>0.0055374</izz>
+        </inertia>
+      </inertial>
+      <collision name='arm_base_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/arm_base.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='arm_base_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/arm_base.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='shoulder_joint' type='revolute'>
+      <pose relative_to='arm_base'>-0.05166 0 0.20271 0 -0 1.5708</pose>
+      <parent>arm_base</parent>
+      <child>bicep</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='bicep'>
+      <pose relative_to='shoulder_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0.12821 4e-06 0.052492 0 -0 0</pose>
+        <mass>1.1198</mass>
+        <inertia>
+          <ixx>0.0012474</ixx>
+          <ixy>-5.4004e-07</ixy>
+          <ixz>-0.0013148</ixz>
+          <iyy>0.0072923</iyy>
+          <iyz>-1.8586e-07</iyz>
+          <izz>0.0068178</izz>
+        </inertia>
+      </inertial>
+      <collision name='bicep_collision'>
+        <pose>0 0 0 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/bicep.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='bicep_visual'>
+        <pose>0 0 0 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/bicep.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='bottom_wrist_joint' type='revolute'>
+      <pose relative_to='bicep'>0 -0.05194 0.269 0 -0 0</pose>
+      <parent>bicep</parent>
+      <child>bottom_wrist</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='bottom_wrist'>
+      <pose relative_to='bottom_wrist_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0.069257 -0 0 -0 0</pose>
+        <mass>0.27721</mass>
+        <inertia>
+          <ixx>0.00104291</ixx>
+          <ixy>4.37155e-09</ixy>
+          <ixz>-2.4505e-09</ixz>
+          <iyy>0.000380518</iyy>
+          <iyz>-7.5601e-09</iyz>
+          <izz>0.00106007</izz>
+        </inertia>
+      </inertial>
+      <collision name='bottom_wrist_collision'>
+        <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wrist.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='bottom_wrist_visual'>
+        <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wrist.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='elbow_joint' type='revolute'>
+      <pose relative_to='bottom_wrist'>0 0 0.13522 0 -0 0</pose>
+      <parent>bottom_wrist</parent>
+      <child>elbow</child>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='elbow'>
+      <pose relative_to='elbow_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0.11109 0 0.046469 0 -0 0</pose>
+        <mass>0.84845</mass>
+        <inertia>
+          <ixx>0.00079656</ixx>
+          <ixy>-7.8011e-10</ixy>
+          <ixz>0.00053616</ixz>
+          <iyy>0.003576</iyy>
+          <iyz>4.6326e-10</iyz>
+          <izz>0.0033698</izz>
+        </inertia>
+      </inertial>
+      <collision name='elbow_collision'>
+        <pose>0 0.05163 0.20994 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/elbow.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='elbow_visual'>
+        <pose>0 0.05163 0.20994 0 -1.5708 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/elbow.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='top_wrist_joint' type='revolute'>
+      <pose relative_to='elbow'>0 0 0.20994 0 -0 0</pose>
+      <parent>elbow</parent>
+      <child>top_wrist</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='top_wrist'>
+      <pose relative_to='top_wrist_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 -0.018782 0.043 0 -0 0</pose>
+        <mass>1.02221</mass>
+        <inertia>
+          <ixx>0.00571426</ixx>
+          <ixy>3.09751e-09</ixy>
+          <ixz>-3.53585e-09</ixz>
+          <iyy>0.0041678</iyy>
+          <iyz>-0.000825555</iyz>
+          <izz>0.00257513</izz>
+        </inertia>
+      </inertial>
+      <collision name='top_wrist_collision'>
+        <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wrist.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <collision name='top_wrist_fixed_joint_lump__epick_collision_1'>
+        <pose>0 0 0.174 0 0 -1.5708</pose>
+        <geometry>
+          <cylinder>
+            <length>0.13</length>
+            <radius>0.044</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='top_wrist_visual'>
+        <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wrist.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='top_wrist_fixed_joint_lump__epick_visual_1'>
+        <pose>0 0 0.224 0 0 -1.5708</pose>
+        <geometry>
+          <mesh>
+            <scale>0.001 0.001 0.001</scale>
+            <uri>model://vnbots_gazebo/meshes/robotiq_epick/visual/robotiq_epick.dae</uri>
+          </mesh>
+        </geometry>
+      </visual>
+      <visual name='top_wrist_fixed_joint_lump__epick_visual_2'>
+        <pose>0 0 0.224 0 0 -1.5708</pose>
+        <geometry>
+          <cylinder>
+            <length>0.03</length>
+            <radius>0.006</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='epick_end_effector_joint' type='revolute'>
+      <pose relative_to='top_wrist'>0 0 0.134 0 0 -1.5708</pose>
+      <parent>top_wrist</parent>
+      <child>epick_end_effector</child>
+      <axis>
+        <xyz>1 0 0</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>50</effort>
+          <velocity>50</velocity>
+        </limit>
+        <dynamics>
+          <damping>0</damping>
+          <friction>10</friction>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='epick_end_effector'>
+      <pose relative_to='epick_end_effector_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.0001</mass>
+        <inertia>
+          <ixx>1e-08</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>1e-08</iyy>
+          <iyz>0</iyz>
+          <izz>1e-08</izz>
+        </inertia>
+      </inertial>
+      <collision name='epick_end_effector_collision'>
+        <pose>0 0 0.1 0 -0 0.005</pose>
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name='epick_end_effector_visual'>
+        <pose>0 0 0.1 0 -0 0.005</pose>
+        <geometry>
+          <cylinder>
+            <length>0.01</length>
+            <radius>0.1</radius>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='front_left_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>0.22 0.25 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>front_left_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='front_left_wheel'>
+      <pose relative_to='front_left_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0.006809 -0 0 -0 0</pose>
+        <mass>2.6578</mass>
+        <inertia>
+          <ixx>0.00856503</ixx>
+          <ixy>1.50741e-19</ixy>
+          <ixz>-4.7815e-19</ixz>
+          <iyy>0.0136706</iyy>
+          <iyz>-2.68136e-19</iyz>
+          <izz>0.00856503</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_left_wheel_collision'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>1</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='front_left_wheel_visual'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='front_right_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>0.22 -0.25 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>front_right_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='front_right_wheel'>
+      <pose relative_to='front_right_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0.006809 -0 0 -0 0</pose>
+        <mass>2.6578</mass>
+        <inertia>
+          <ixx>0.00856503</ixx>
+          <ixy>1.50741e-19</ixy>
+          <ixz>-4.7815e-19</ixz>
+          <iyy>0.0136706</iyy>
+          <iyz>-2.68136e-19</iyz>
+          <izz>0.00856503</izz>
+        </inertia>
+      </inertial>
+      <collision name='front_right_wheel_collision'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>1</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='front_right_wheel_visual'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='rear_left_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.22 0.25 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rear_left_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rear_left_wheel'>
+      <pose relative_to='rear_left_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0.006809 -0 0 -0 0</pose>
+        <mass>2.6578</mass>
+        <inertia>
+          <ixx>0.00856503</ixx>
+          <ixy>1.50741e-19</ixy>
+          <ixz>-4.7815e-19</ixz>
+          <iyy>0.0136706</iyy>
+          <iyz>-2.68136e-19</iyz>
+          <izz>0.00856503</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_left_wheel_collision'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+        <surface>
+          <contact>
+            <ode>
+              <kp>1e+07</kp>
+              <kd>1</kd>
+            </ode>
+          </contact>
+          <friction>
+            <ode>
+              <mu>1</mu>
+              <mu2>1</mu2>
+              <fdir1>1 0 0</fdir1>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name='rear_left_wheel_visual'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <joint name='rear_right_wheel_joint' type='revolute'>
+      <pose relative_to='base_link'>-0.22 -0.25 0 0 -0 0</pose>
+      <parent>base_link</parent>
+      <child>rear_right_wheel</child>
+      <axis>
+        <xyz>0 1 0</xyz>
+        <limit>
+          <lower>-1e+16</lower>
+          <upper>1e+16</upper>
+        </limit>
+        <dynamics>
+          <spring_reference>0</spring_reference>
+          <spring_stiffness>0</spring_stiffness>
+        </dynamics>
+      </axis>
+    </joint>
+    <link name='rear_right_wheel'>
+      <pose relative_to='rear_right_wheel_joint'>0 0 0 0 -0 0</pose>
+      <inertial>
+        <pose>-0 0.006809 -0 0 -0 0</pose>
+        <mass>2.6578</mass>
+        <inertia>
+          <ixx>0.00856503</ixx>
+          <ixy>1.50741e-19</ixy>
+          <ixz>-4.7815e-19</ixz>
+          <iyy>0.0136706</iyy>
+          <iyz>-2.68136e-19</iyz>
+          <izz>0.00856503</izz>
+        </inertia>
+      </inertial>
+      <collision name='rear_right_wheel_collision'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </collision>
+      <visual name='rear_right_wheel_visual'>
+        <pose>0 0 0 1.5708 -0 0</pose>
+        <geometry>
+          <mesh>
+            <scale>1 1 1</scale>
+            <uri>model://multi_robot/models/manipulator/four_wheels_with_arm/meshes/wheel.stl</uri>
+          </mesh>
+        </geometry>
+      </visual>
+    </link>
+    <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+      <controlPeriod>0.001</controlPeriod>
+      <legacyModeNS>0</legacyModeNS>
+    </plugin>
+    <plugin name='joint_state_publisher' filename='libgazebo_ros_joint_state_publisher.so'>
+      <jointName>arm_base_joint, shoulder_joint, bottom_wrist_joint, elbow_joint, bottom_wrist_joint</jointName>
+    </plugin>
+    <plugin name='diff_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+      <legacyMode>0</legacyMode>
+      <alwaysOn>1</alwaysOn>
+      <updateRate>1000.0</updateRate>
+      <leftJoint>front_left_wheel_joint, rear_left_wheel_joint</leftJoint>
+      <rightJoint>front_right_wheel_joint, rear_right_wheel_joint</rightJoint>
+      <wheelSeparation>0.5</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <wheelTorque>10</wheelTorque>
+      <publishTf>1</publishTf>
+      <odometryFrame>map</odometryFrame>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <wheelAcceleration>2.8</wheelAcceleration>
+      <publishWheelJointState>1</publishWheelJointState>
+      <publishWheelTF>0</publishWheelTF>
+      <odometrySource>world</odometrySource>
+      <rosDebugLevel>Debug</rosDebugLevel>
+    </plugin>
+    <static>0</static>
+    <plugin name='gazebo_ros_vacuum_gripper' filename='libgazebo_ros_vacuum_gripper.so'>
+      <bodyName>epick_end_effector</bodyName>
+      <topicName>grasping</topicName>
+    </plugin>
+  </model>
+</sdf>

@@ -1,0 +1,11 @@
+<launch>
+  <arg name="prefix" default=""/>
+  <arg name="with_arm" default="false"/>
+  <arg name="robot_type" default="mobile_robot"/>
+  <arg name="model_name" default="neuronbot2"/>
+  
+  <param name="robot_description" textfile="$(find multi_robot)/models/$(arg robot_type)/$(arg model_name)/model.urdf"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" >
+    <param name="prefix_tf_with" value="$(arg prefix)/" />
+  </node>
+</launch>

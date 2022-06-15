@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<robot name="RobotIPSA" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:property name="wheelRadius" value="0.12"/>
+  <xacro:property name="baseWidth" value="0.45"/>
+  <xacro:property name="baseHeight" value="0.10"/>
+  <xacro:property name="baseAltitude" value="0.20"/> <!-- 0.25 -->
+  <xacro:property name="camSize" value="0.10"/>
+
+  <xacro:include filename="$(find evry_project_description)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find evry_project_description)/urdf/robot.gazebo"/>
+
+  <xacro:macro name="default_origin" params="z">
+    <origin xyz="0 0 ${z}" rpy="0 0 0"/>
+  </xacro:macro>
+
+  <xacro:macro name="default_inertial" params="mass">
+    <inertial>
+      <mass value="${mass}"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </xacro:macro>
+
+  <link name="base_footprint"/>
+
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://evry_project_description/meshes/base.STL" scale="5 5 5"/>
+      </geometry>
+      <origin xyz="0.035 0 ${baseAltitude}" rpy="0 0 ${pi}"/>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="${baseWidth} ${baseHeight} ${baseAltitude}"/>
+      </geometry>
+      <xacro:default_origin z="${2*baseAltitude/3}"/>
+    </collision>
+    <xacro:default_inertial mass="3.0"/>
+  </link>
+
+  <joint name="base_footprint_to_base_link" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin rpy="0 0 ${-pi/2}"/>
+  </joint>
+
+  <xacro:macro name="wheel" params="prefix reflect">
+    <link name="${prefix}_wheel">
+      <visual>
+        <geometry>
+          <mesh filename="package://evry_project_description/meshes/roueAr.STL" scale="5 5 5"/>
+        </geometry>
+        <material name="black"/>
+      </visual>
+      <collision>
+          <geometry>
+              <sphere radius="${wheelRadius}"/>
+          </geometry>
+          <xacro:default_origin z="0"/>
+      </collision>
+      <xacro:default_inertial mass="1"/>
+    </link>
+
+    <joint name="base_to_${prefix}_wheel" type="fixed">
+        <parent link="base_link"/>
+        <child link="${prefix}_wheel"/>
+        <origin xyz="${reflect*baseWidth/2} 0 ${wheelRadius}" rpy="0 ${pi/2} 0" />
+        <axis xyz="0 5 0"/>
+    </joint>
+  </xacro:macro>
+  <xacro:wheel prefix="right" reflect="1.825" />
+  <xacro:wheel prefix="left" reflect="-1.955" />
+
+  <link name="front_wheel">
+    <visual>
+      <geometry>
+        <mesh filename="package://evry_project_description/meshes/roueAv.STL" scale="5 5 5"/>
+      </geometry>
+      <origin xyz="0.05 0 0"/> <!-- -0.05 -->
+      <material name="black"/>
+    </visual>
+    <collision>
+        <geometry>
+            <sphere radius="${wheelRadius}"/>
+        </geometry>
+        <xacro:default_origin z="0"/>
+    </collision>
+    <xacro:default_inertial mass="1"/>
+  </link>
+
+  <joint name="base_link_to_front_wheel" type="fixed">
+      <parent link="base_link"/>
+      <child link="front_wheel"/>
+      <origin xyz="0 0.52 ${wheelRadius}" rpy="0 ${pi/2} 0"/>
+      <axis xyz="0 1 0"/>
+  </joint>
+
+  <joint name="sonar_front_joint" type="fixed">
+      <axis xyz="0 1 0" />
+      <origin rpy="0 0 0" xyz="0.5 0 0.25" />
+      <parent link="base_footprint"/>
+      <child link="base_sonar_front"/>
+  </joint>
+
+  <link name="base_sonar_front">
+      <!-- <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.5 0.5 0.5"/>
+        </geometry>
+      </collision> -->
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <box size="0.1 0.1 0.1"/>
+        </geometry>
+      </visual>
+       <!-- <inertial>
+        <mass value="1e-5" />
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+      </inertial> -->
+   </link>
+
+
+
+
+
+</robot>

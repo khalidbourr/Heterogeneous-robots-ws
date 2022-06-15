@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.4">
+  <world name="default">
+    <!-- *********************INITIAL POSE OF THE CAMERA***************************** -->
+		<gui>
+      <camera name="main_cam">
+        <pose>1.15 -71.8 70 0 0.8 1.57</pose>
+      </camera>
+    </gui>
+
+    <!-- *********************GROUND AND SUN***************************** -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- *********************FLAGS***************************** -->
+    <include>
+      <uri>model://red_flag</uri>
+      <name>flag_1</name>
+      <pose>-40 20 0 0 0 0</pose>
+    </include>
+
+    <!-- **********************DISTANCE TO FLAGS PLUGIN**************************** -->
+    <plugin name="dtfPlugin" filename="libdistance_to_flag_plugin.so">
+      <nbFlags>1</nbFlags>
+    </plugin>
+
+    <!-- **********************WALLS**************************** -->
+    <include>
+      <uri>model://walls_evry</uri>
+      <name>limits</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>
+
+    <!-- **********************OBSTACLES**************************** -->
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-38.16 28.54 0 0 0 0</pose>
+      <name>obstacle_1</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-38.68 8.27 0 0 0 0</pose>
+      <name>obstacle_2</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-37.6 -16.35 0 0 0 0</pose>
+      <name>obstacle_3</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-33.77 -4.23 0 0 0 0</pose>
+      <name>obstacle_4</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-24.82 -25.54 0 0 0 0</pose>
+      <name>obstacle_5</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-21.83 19.86 0 0 0 0</pose>
+      <name>obstacle_6</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-20.72 -3.03 0 0 0 0</pose>
+      <name>obstacle_7</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-11.63 -21.17 0 0 0 0</pose>
+      <name>obstacle_8</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-9.32 25.52 0 0 0 0</pose>
+      <name>obstacle_9</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>-3.87 -14.86 0 0 0 0</pose>
+      <name>obstacle_10</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>3.5 1.89 0 0 0 0</pose>
+      <name>obstacle_11</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>6.67 23.2 0 0 0 0</pose>
+      <name>obstacle_12</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>10.44 -25.58 0 0 0 0</pose>
+      <name>obstacle_13</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>23.77 7.52 0 0 0 0</pose>
+      <name>obstacle_14</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>26.46 21.76 0 0 0 0</pose>
+      <name>obstacle_15</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>24.96 -7.97 0 0 0 0</pose>
+      <name>obstacle_16</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>35.52 -25.59 0 0 0 0</pose>
+      <name>obstacle_17</name>
+    </include>
+
+    <include>
+      <uri>model://basic_box</uri>
+      <pose>40.65 -9.57 0 0 0 0</pose>
+      <name>obstacle_18</name>
+    </include>
+  </world>
+</sdf>

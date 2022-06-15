@@ -1,0 +1,213 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <!-- World Camera Settings-->
+  <gui>
+    <camera name="user_camera">
+        <pose frame=''>24.1194 -0.328974 17.8913 0 0.683643 3.13619</pose>
+        <!--<pose frame=''>0.715311 -25.388 35.3666 0 0.999643 1.53219</pose>-->
+	      <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+    </camera>
+  </gui>
+    <!--A global light source -->
+    <include>
+      <uri>model://sun</uri>
+      <cast_shadows>0</cast_shadows>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <!-- Warehouse pallets -->
+    <!--    <include>
+          <uri>model://warehouse_pallet</uri>
+      <name>warehouse_pallet_0</name>
+        </include>
+    -->
+
+  <!-- Temporarily delivered pallet -->
+    
+
+
+    <!-- Our Robot model --> 
+    <!-- <model name="amazon_warehouse_robot">
+      <include>
+        <uri>model://amazon_warehouse_robot</uri>
+	      <pose>0 0 0 0 0 0</pose>
+      </include>
+    </model> -->
+
+   <!-- <model name="amazon_warehouse_robot_patrol">
+      <include>
+        <uri>model://amazon_warehouse_robot</uri>
+	      <pose>3 0 0 0 0 3.14</pose>
+	      <gazebo reference="laser_link">
+          <sensor>
+            <plugin>
+              <robotNamespace>/amazon_warehouse_robot_patrol</robotNamespace>
+              <topicName>amazon_warehouse_robot_patrol/laser/scan</topicName>
+            </plugin>
+          </sensor>
+	      </gazebo>
+      </include> 
+    </model>-->
+
+    
+
+    <!-- Walls that surround the warehouse -->
+      <include>
+        <uri>model://warehouse_walls</uri>
+      </include>
+
+
+    <model name='hinged_door'>
+      <link name='door'>
+        <inertial>
+          <mass>41.3256</mass>
+          <pose>0 -0.06858 0 0 -0 0</pose>
+          <inertia>
+            <ixx>14.2053</ixx>
+            <ixy>0.0004</ixy>
+            <ixz>0</ixz>
+            <iyy>17.1997</iyy>
+            <iyz>0</iyz>
+            <izz>3.0298</izz>
+          </inertia>
+        </inertial>
+        <collision name='collision'>
+          <pose>0 -0.06858 0 0 -0 0</pose>
+         <geometry>
+            <mesh>
+              <uri>model://hinged_door/meshes/door.dae</uri>
+              <scale>3.0 1.5 1.8</scale>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='visual'>
+          <pose>0 -0.06858 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://hinged_door/meshes/door.dae</uri>
+              <scale>3.0 1.5 1.8</scale>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>1</kinematic>
+      </link>
+      <pose>-1.0 -1.007284 0.000770 -0.000071 0.007538 -0.001876</pose>
+    </model>
+          <model name='destination_1'>
+          <link name='link'>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>0.166667</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.166667</iyy>
+            <iyz>0</iyz>
+            <izz>0.166667</izz>
+          </inertia>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+        </inertial>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+        <pose frame=''>0 0 0 0 -0 0</pose>
+        <gravity>1</gravity>
+        <visual name='visual'>
+          <geometry>
+            <box>
+              <size>1.0 1.0 0.001</size>
+            </box>
+          </geometry>
+      <material>
+            <script>
+              <name>Gazebo/Blue</name>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+            </script>
+            <shader type='vertex'>
+              <normal_map>__default__</normal_map>
+            </shader>
+          </material>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <transparency>0</transparency>
+          <cast_shadows>1</cast_shadows>
+        </visual>
+        <collision name='collision'>
+          <laser_retro>0</laser_retro>
+          <max_contacts>10</max_contacts>
+          <pose frame=''>0 0 0 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>1.0 1.0 0.0</size>
+            </box>
+          </geometry>    
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.998000</mu>
+                <mu2>0.998000</mu2>
+                <fdir1>0.000000 0.000000 0.000000</fdir1>
+                <slip1>0.000000</slip1>
+                <slip2>0.000000</slip2>
+              </ode>
+            </friction>
+            <bounce>
+              <restitution_coefficient>0.000000</restitution_coefficient>
+              <threshold>100000.000000</threshold>
+            </bounce>
+            <contact>
+              <ode>
+                <soft_cfm>0.000000</soft_cfm>
+                <soft_erp>0.200000</soft_erp>
+                <kp>100000.000000</kp>
+                <kd>1.000000</kd>
+                <max_vel>100.000000</max_vel>
+                <min_depth>0.001000</min_depth>
+              </ode>
+            </contact>
+          </surface>     
+        </collision>
+      </link>
+      <static>1</static>
+      <allow_auto_disable>1</allow_auto_disable>
+          <pose>0.0 9.0 0.0 0 -0 0</pose>
+    </model>s
+
+
+
+    <!-- A visual element to show staging area
+	<model name="staging_area">
+	<link name="staging_area_link">
+	      <visual name="staging_area_visual">
+		<pose>10 0 0 0 0 0</pose>
+	        <cast_shadows>false</cast_shadows>
+		<geometry>
+		  <plane>
+		    <normal>0 0 1</normal>
+		    <size>15 19</size>
+		</plane>
+		</geometry>
+	      </visual> 
+	</link>
+	</model>
+-->
+  </world>
+</sdf>

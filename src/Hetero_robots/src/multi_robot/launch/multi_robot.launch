@@ -1,0 +1,36 @@
+<launch>
+  <arg name="x_pos" default="-3.0"/>
+  <arg name="y_pos" default="1.0"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="ns1" default="robot1"/>
+
+
+
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find multi_robot)/worlds/flags.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+  
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns1)"/>
+    <arg name="x_pos" value="2.0"/>
+    <arg name="y_pos" value="2.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="0.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
+  
+
+  
+
+
+  
+  
+</launch>

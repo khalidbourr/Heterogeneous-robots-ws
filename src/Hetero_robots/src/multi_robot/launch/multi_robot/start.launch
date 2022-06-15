@@ -1,0 +1,21 @@
+<launch>
+    <env name="GAZEBO_MODEL_PATH" value="$(find multi_robot)/models"/>
+    <arg name="ns1" default="robot1"/>
+
+
+    <include file="$(find multi_robot)/launch/multi_robot/world.launch">
+        <arg name="ns1" value="$(arg ns1)"/>
+
+    </include>
+
+    <include file="$(find multi_robot)/launch/multi_robot/navigation.launch">
+        <arg name="ns1" value="$(arg ns1)"/>
+
+    </include>
+    
+
+    <node pkg="tf2_ros" type="static_transform_publisher" name="map1_tf_publisher" args="0 0 0 0 0 0 world $(arg ns1)/map" />
+
+    
+    
+</launch>

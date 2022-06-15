@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot name="mastercam" xmlns:xacro="http://www.ros.org/wiki/xacro">
+	<xacro:property name="camSize" value="0.10"/>
+
+	<xacro:include filename="$(find rover_ipsa)/urdf/materials.xacro"/>
+
+	<xacro:macro name="camOrigin">
+		<origin xyz="0 0 0"/>
+	</xacro:macro>
+
+	<xacro:macro name="default_inertial" params="mass">
+    <inertial>
+      <mass value="${mass}"/>
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0"/>
+    </inertial>
+  </xacro:macro>
+
+	<link name="mastercam">
+		<visual>
+		  <geometry>
+				<mesh filename="package://rover_ipsa/meshes/kinect/meshes/kinect.dae"/>
+			</geometry>
+		  <xacro:camOrigin/>
+		  <material name="black"/>
+		</visual>
+		<collision>
+		  <geometry>
+		    <box size="${camSize} ${camSize} ${camSize}"/>
+		  </geometry>
+		  <xacro:camOrigin/>
+		</collision>
+		<xacro:default_inertial mass="1"/>
+  </link>
+
+	<gazebo reference="mastercam">
+    <material>Gazebo/Black</material>
+		<gravity>0</gravity>
+  </gazebo>
+
+	<!-- camera plugin-->
+  <gazebo reference="mastercam">
+    <sensor type="camera" name="mastercam">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>1920</width>
+          <height>1080</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>rgb</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>mastercam</frameName>
+        <hackBaseline>0.0</hackBaseline>
+        <distortionK1>0.0604</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0.0</Cx>
+        <Cy>0.0</Cy>
+        <focalLength>0.0</focalLength>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+</robot>

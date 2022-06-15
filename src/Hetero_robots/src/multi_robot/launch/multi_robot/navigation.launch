@@ -1,0 +1,21 @@
+<launch>
+    <arg name="ns1" default="robot1"/>
+    <arg name="ns2" default="robot2"/>
+    <arg name="ns3" default="robot3"/>
+	<arg name="map_name" default="$(find multi_robot)/maps/obstacle.yaml" />
+
+    <include file="$(find navigation)/launch/bringup.launch">
+        <arg name="namespace" value="$(arg ns1)"/>
+	<arg name="map" value="$(arg map_name)" />
+    	<arg name="x_pos" value="2.0"/>
+    	<arg name="y_pos" value=" 2.0"/>
+        <arg name="yaw" value=" 1.57"/>
+    </include>
+
+
+
+</launch>
+
+
+
+

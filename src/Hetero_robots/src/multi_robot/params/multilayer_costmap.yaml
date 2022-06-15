@@ -1,0 +1,24 @@
+move_base:
+  global_costmap:
+    plugins:
+        - {name: static,           type: "costmap_2d::StaticLayer"}
+        # - {name: multibot_layer,   type: "multibot_layer_namespace::MultibotLayer"}
+        - {name: sensor,           type: "costmap_2d::ObstacleLayer"}
+        - {name: inflation,        type: "costmap_2d::InflationLayer"}
+    robot_radius: 0.125
+  
+  local_costmap:
+    global_frame: world # Use world frame to combine all robot's position in the same coordinate system
+    plugins:
+            # - {name: simplelayer, type: "multibot_layer_namespace::MultibotLayer"}
+            # - {name: gridlayer, type: "multibot_layer_namespace::GridLayer"}
+        - {name: multibot_layer, type: "multibot_layer_namespace::MultibotLayer"}
+        - {name: obstacle_layer, type: "costmap_2d::ObstacleLayer"}
+        - {name: inflation, type: "costmap_2d::InflationLayer"}
+    robot_radius: 0.125
+    update_frequency: 10.0
+    publish_frequency: 10.0
+    resolution: 0.05
+
+  DWAPlannerROS:
+    sim_time: 1.0

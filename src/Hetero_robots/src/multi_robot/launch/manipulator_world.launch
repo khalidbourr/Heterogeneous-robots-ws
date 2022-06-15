@@ -1,0 +1,37 @@
+<launch>
+  <arg name="x_pos" default="-3.0"/>
+  <arg name="y_pos" default="1.0"/>
+  <arg name="z_pos" default="0.0"/>
+  <arg name="ns1" default="robot1"/>
+  <arg name="ns2" default="robot2"/>
+  <arg name="ns3" default="robot3"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+  <include file="$(find robot_description)/launch/manipulator.launch">
+    <arg name="namespace" value="$(arg ns1)"/>
+    <arg name="x_pos" value="-7.0"/>
+    <arg name="y_pos" value=" 2.0"/>
+    <arg name="z_pos" value=" 0.0"/>
+    <arg name="yaw" value=" 1.57"/>
+  </include>
+  <include file="$(find robot_description)/launch/manipulator.launch">
+    <arg name="namespace" value="$(arg ns2)"/>
+    <arg name="x_pos" value=" 7.0"/>
+    <arg name="y_pos" value="-1.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value=" 1.57"/>
+  </include>
+  <include file="$(find robot_description)/launch/manipulator.launch">
+    <arg name="namespace" value="$(arg ns3)"/>
+    <arg name="x_pos" value=" 0.5"/>
+    <arg name="y_pos" value=" 3.0"/>
+    <arg name="z_pos" value=" 0.0"/>
+    <arg name="yaw" value=" 0.0"/>
+  </include>
+</launch>
