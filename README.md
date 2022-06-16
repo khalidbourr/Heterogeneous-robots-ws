@@ -1,6 +1,10 @@
 # Heterogeneous-robots-ws
 A repository that contains different models of robots and a launch file for spawning multi-robots 
 
+Clone
+```
+git clone https://github.com/khalidbourr/Heterogeneous-robots-ws.git
+```
 
 Insert new models in gazebo:
 ```
