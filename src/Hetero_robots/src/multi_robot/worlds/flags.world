@@ -23,6 +23,27 @@
       <name>flag_1</name>
       <pose>-40 20 0 0 0 0</pose>
     </include>
+    
+    <include>
+      <uri>model://white_flag</uri>
+      <name>flag_2</name>
+      <pose>40 -20 0 0 0 0</pose>
+    </include>
+    
+    
+    <include>
+      <uri>model://green_flag</uri>
+      <name>flag_3</name>
+      <pose>30 0.0 0 0 0 0</pose>
+    </include>
+    
+    <include>
+      <uri>model://blue_flag</uri>
+      <name>flag_4</name>
+      <pose>30 16 0 0 0 0</pose>
+    </include>
+    
+    
 
     <!-- **********************DISTANCE TO FLAGS PLUGIN**************************** -->
     <plugin name="dtfPlugin" filename="libdistance_to_flag_plugin.so">

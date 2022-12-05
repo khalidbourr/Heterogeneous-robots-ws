@@ -3,6 +3,15 @@
   <arg name="y_pos" default="1.0"/>
   <arg name="z_pos" default="0.0"/>
   <arg name="ns1" default="robot1"/>
+  <arg name="ns2" default="robot2"/>
+  <arg name="ns3" default="robot3"/>
+  <arg name="ns4" default="robot4"/>
+  <!--<arg name="ns5" default="robot5"/>
+  <arg name="ns6" default="robot6"/>
+  <arg name="ns7" default="robot7"/>
+  <arg name="ns8" default="robot8"/>
+  <arg name="ns9" default="robot9"/>
+  <arg name="ns10" default="robot10"/> -->
 
 
 
@@ -18,8 +27,8 @@
   
   <include file="$(find multi_robot)/launch/one_robot/robot.launch">
     <arg name="namespace" value="$(arg ns1)"/>
-    <arg name="x_pos" value="2.0"/>
-    <arg name="y_pos" value="2.0"/>
+    <arg name="x_pos" value="0.0"/>
+    <arg name="y_pos" value="0.0"/>
     <arg name="z_pos" value="0.0"/>
     <arg name="yaw" value="0.0"/>
     <arg name="robot_type" value="mobile_robot"/>
@@ -28,9 +37,110 @@
   </include>
   
 
+    <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns2)"/>
+    <arg name="x_pos" value="32.0"/>
+    <arg name="y_pos" value="-20.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="5.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
+
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns3)"/>
+    <arg name="x_pos" value="-40.0"/>
+    <arg name="y_pos" value="10.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="0.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
   
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns4)"/>
+    <arg name="x_pos" value="20.0"/>
+    <arg name="y_pos" value="-10.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="1.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
+  
+  
+ <!-- 
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns5)"/>
+    <arg name="x_pos" value="-3.0"/>
+    <arg name="y_pos" value="-16.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="-1.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
+  
+  
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns6)"/>
+    <arg name="x_pos" value="-28.0"/>
+    <arg name="y_pos" value="-1.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="-2.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
+  
+  
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns7)"/>
+    <arg name="x_pos" value="-36.0"/>
+    <arg name="y_pos" value="-16.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="-1.5"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
 
 
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns8)"/>
+    <arg name="x_pos" value="3.0"/>
+    <arg name="y_pos" value="-26.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="-1.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
   
+    <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns9)"/>
+    <arg name="x_pos" value="2.0"/>
+    <arg name="y_pos" value="2.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="-1.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
+
+  
+    <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns10)"/>
+    <arg name="x_pos" value="31.0"/>
+    <arg name="y_pos" value="-31.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="0.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
+  </include>
+   -->
   
 </launch>
