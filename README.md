@@ -21,7 +21,7 @@ Each model has been carefully crafted and optimized for use in simulations, prov
 
 1. clone the repository: `git clone https://github.com/khalidbourr/Heterogeneous-robots-ws.git`
 2. import your world inside `cd Heterogeneous-robots-ws/src/Hetero_robots/src/multi_robot/worlds`
-3. in case of new model "custom_model", copy them inside :`cd Heterogeneous-robots-ws/src/Hetero_robots/src/multi_robot/worlds/custom_model`
+3. in case of new model "custom_model", copy it inside :`cd Heterogeneous-robots-ws/src/Hetero_robots/src/multi_robot/worlds/custom_model`
 4. and then inside gazeebo, example below:
 ```
 cd Heterogeneous-robots-ws/src/Hetero_robots/src/multi_robot/worlds
