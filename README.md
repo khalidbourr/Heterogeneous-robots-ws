@@ -1,5 +1,17 @@
 # Heterogeneous-robots-ws
-A repository that contains different models of robots and a launch file for spawning multi-robots 
+
+This repository includes a variety of robot models and a single launch file for launching many robots inside a simulation. The purpose of this repository is to make the process of spawning various robots simpler and more comfortable for the user. This repository allows the user to launch many robots with a single command, speeding simulation setup and decreasing preparation time. Whether you are investigating novel robot models or doing sophisticated simulations, this repository offers a straightforward and effective solution for your requirements.
+
+```
+ <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find multi_robot)/worlds/flags.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+  ```
 
 Clone
 ```
