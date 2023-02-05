@@ -48,7 +48,7 @@ cd Heterogeneous-robots-ws/
 rosdep install --from-paths src --ignore-src -r -y
 catkin_make
 ```
-Launch
+6- Launch the simulator with the robots specified.
 ```
 source devel/setup.bash
 roslaunch multi_robot multi_robot.launch
