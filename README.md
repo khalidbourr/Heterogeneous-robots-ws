@@ -27,16 +27,18 @@ Each model has been carefully crafted and optimized for use in simulations, prov
 cd Heterogeneous-robots-ws/src/Hetero_robots/src/multi_robot/worlds
 sudo cp -r custom_model ~/.gazebo/models
 ```
-4- Modify the launch file, with the type and the model of the robots
+4- The launch file in this repository can be modified to specify the type and model of the robots being spawned. In the `robot_type` argument, you can select between `mobile_robot`, `manipulator_robot`, or `drone`.
 
 ```
- <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find multi_robot)/worlds/flags.world"/>
-    <arg name="paused" value="false"/>
-    <arg name="use_sim_time" value="true"/>
-    <arg name="gui" value="true"/>
-    <arg name="headless" value="false"/>
-    <arg name="debug" value="false"/>
+  <include file="$(find multi_robot)/launch/one_robot/robot.launch">
+    <arg name="namespace" value="$(arg ns1)"/>
+    <arg name="x_pos" value="0.0"/>
+    <arg name="y_pos" value="0.0"/>
+    <arg name="z_pos" value="0.0"/>
+    <arg name="yaw" value="0.0"/>
+    <arg name="robot_type" value="mobile_robot"/>
+    <arg name="model_name" value="two_wheels"/>
+    <arg name="file_type" value="urdf"/>
   </include>
   ```
   
